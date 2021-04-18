@@ -1,0 +1,50 @@
+{
+  "settings": {
+    "analysis": {
+      "filter" : {
+        "russian_stemmer": {
+          "type" : "stemmer",
+          "language" : "russian"
+        }
+      },
+      "analyzer": {
+        "my_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "russian_stemmer"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "date": {
+        "type": "date",
+        "format": "dd.MM.yyyy HH:mm"
+      },
+      "category": {
+        "type": "text",
+        "fielddata": true
+      },
+      "text": {
+        "type": "text",
+        "fielddata": true,
+        "analyzer":"my_analyzer"
+      },
+      "video-href": {
+        "type": "text",
+        "fielddata": true
+      },
+      "image-href": {
+        "type": "text",
+        "fielddata": true
+      },
+      "view-num": {
+        "type": "long"
+      }
+    }
+  }
+}

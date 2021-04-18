@@ -1,0 +1,16 @@
+{
+  "aggs": {
+    "by_category": {
+      "terms": {
+        "field": "category"
+      },
+      "aggs": {
+        "do_a_sum_on_field_view_num":  {
+          "sum": {
+            "field": "view-num"
+          }
+        }
+      }
+    }
+  }
+}

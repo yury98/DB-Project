@@ -1,0 +1,87 @@
+{
+  "settings": {
+    "analysis": {
+      "filter" : {
+        "russian_stemmer": {
+          "type" : "stemmer",
+          "language" : "russian"
+        }
+      },
+      "analyzer": {
+        "my_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "russian_stemmer"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "reg_date": {
+        "type": "date",
+        "format": "dd.MM.yyyy HH:mm"
+      },
+      "name": {
+        "type": "text",
+        "fielddata": true
+      },
+      "image-href": {
+        "type": "text",
+        "fielddata": true
+      },
+      "birthday": {
+        "type": "date",
+        "format": "dd.MM.yyyy HH:mm"
+      },
+      "email": {
+        "type": "text",
+        "fielddata": true
+      },
+      "profession": {
+        "type": "text",
+        "fielddata": true
+      },
+      "education": {
+        "properties": {
+          "university": {
+            "type": "text",
+            "fielddata": true
+          },
+          "end-year": {
+            "type": "long"
+          },
+          "description": {
+            "type": "text",
+            "fielddata": true,
+            "analyzer": "my_analyzer"
+          },
+          "speciality": {
+            "type": "text",
+            "fielddata": true
+          }
+        }
+      },
+      "comment": {
+        "type": "nested",
+        "properties": {
+          "date": {
+            "type": "date",
+            "format": "dd.MM.yyyy HH:mm"
+          },
+          "end-year": {
+            "type": "long"
+          },
+          "text": {
+            "type": "text",
+            "fielddata": true,
+            "analyzer": "my_analyzer"
+          }
+        }
+      }
+    }
+  }
+}
